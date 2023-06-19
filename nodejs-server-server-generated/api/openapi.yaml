@@ -1,0 +1,884 @@
+openapi: 3.0.1
+info:
+  title: Events App API
+  description: API for scheduling events and managing users
+  version: 1.0.0
+servers:
+- url: http://localhost:3000/api/v1
+tags:
+- name: Users
+  description: This endpoint has all the info related to users.
+- name: Events
+  description: All the endpoints for Events
+- name: Locations
+  description: All the endpoints for Locations
+- name: Categories
+  description: All the endpoints for Categories
+- name: Organizers
+  description: All the endpoints for Organizers
+paths:
+  /users:
+    get:
+      tags:
+      - Users
+      summary: Get all Users
+      operationId: usersGET
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+                x-content-type: application/json
+      x-swagger-router-controller: Users
+    post:
+      tags:
+      - Users
+      summary: Create a User
+      operationId: usersPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRequest'
+        required: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      x-swagger-router-controller: Users
+  /users/{id}:
+    get:
+      tags:
+      - Users
+      summary: Get a User by ID
+      operationId: usersIdGET
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      x-swagger-router-controller: Users
+    put:
+      tags:
+      - Users
+      summary: Update a User by ID
+      operationId: usersIdPUT
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdate'
+        required: false
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+      x-swagger-router-controller: Users
+    delete:
+      tags:
+      - Users
+      summary: Delete a User by ID
+      operationId: usersIdDELETE
+      parameters:
+      - name: id
+        in: path
+        description: User ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+      x-swagger-router-controller: Users
+  /events:
+    get:
+      tags:
+      - Events
+      summary: Get all events
+      operationId: eventsGET
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Event'
+                x-content-type: application/json
+      x-swagger-router-controller: Events
+    post:
+      tags:
+      - Events
+      summary: Create an event
+      operationId: eventsPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventRequest'
+        required: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+      x-swagger-router-controller: Events
+  /events/{id}:
+    get:
+      tags:
+      - Events
+      summary: Get an event by ID
+      operationId: eventsIdGET
+      parameters:
+      - name: id
+        in: path
+        description: Event ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+      x-swagger-router-controller: Events
+    put:
+      tags:
+      - Events
+      summary: Update an event by ID
+      operationId: eventsIdPUT
+      parameters:
+      - name: id
+        in: path
+        description: Event ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventUpdate'
+        required: false
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+      x-swagger-router-controller: Events
+    delete:
+      tags:
+      - Events
+      summary: Delete an event by ID
+      operationId: eventsIdDELETE
+      parameters:
+      - name: id
+        in: path
+        description: Event ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+      x-swagger-router-controller: Events
+  /categories:
+    get:
+      tags:
+      - Categories
+      summary: Get all categories
+      operationId: categoriesGET
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+                x-content-type: application/json
+      x-swagger-router-controller: Categories
+    post:
+      tags:
+      - Categories
+      summary: Create a category
+      operationId: categoriesPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryRequest'
+        required: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+      x-swagger-router-controller: Categories
+  /categories/{id}:
+    get:
+      tags:
+      - Categories
+      summary: Get a category by ID
+      operationId: categoriesIdGET
+      parameters:
+      - name: id
+        in: path
+        description: Category ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+      x-swagger-router-controller: Categories
+    put:
+      tags:
+      - Categories
+      summary: Update a category by ID
+      operationId: categoriesIdPUT
+      parameters:
+      - name: id
+        in: path
+        description: Category ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CategoryUpdate'
+        required: false
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+      x-swagger-router-controller: Categories
+    delete:
+      tags:
+      - Categories
+      summary: Delete a category by ID
+      operationId: categoriesIdDELETE
+      parameters:
+      - name: id
+        in: path
+        description: Category ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+      x-swagger-router-controller: Categories
+  /locations:
+    get:
+      tags:
+      - Locations
+      summary: Get all locations
+      operationId: locationsGET
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Location'
+                x-content-type: application/json
+      x-swagger-router-controller: Locations
+    post:
+      tags:
+      - Locations
+      summary: Create a location
+      operationId: locationsPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationRequest'
+        required: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+      x-swagger-router-controller: Locations
+  /locations/{id}:
+    get:
+      tags:
+      - Locations
+      summary: Get a location by ID
+      operationId: locationsIdGET
+      parameters:
+      - name: id
+        in: path
+        description: Location ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+      x-swagger-router-controller: Locations
+    put:
+      tags:
+      - Locations
+      summary: Update a location by ID
+      operationId: locationsIdPUT
+      parameters:
+      - name: id
+        in: path
+        description: Location ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LocationUpdate'
+        required: false
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+      x-swagger-router-controller: Locations
+    delete:
+      tags:
+      - Locations
+      summary: Delete a location by ID
+      operationId: locationsIdDELETE
+      parameters:
+      - name: id
+        in: path
+        description: Location ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+      x-swagger-router-controller: Locations
+  /organizers:
+    get:
+      tags:
+      - Organizers
+      summary: Get all organizers
+      operationId: organizersGET
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organizer'
+                x-content-type: application/json
+      x-swagger-router-controller: Organizers
+    post:
+      tags:
+      - Organizers
+      summary: Create an organizer
+      operationId: organizersPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizerRequest'
+        required: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organizer'
+      x-swagger-router-controller: Organizers
+  /organizers/{id}:
+    get:
+      tags:
+      - Organizers
+      summary: Get an organizer by ID
+      operationId: organizersIdGET
+      parameters:
+      - name: id
+        in: path
+        description: Organizer ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organizer'
+      x-swagger-router-controller: Organizers
+    put:
+      tags:
+      - Organizers
+      summary: Update an organizer by ID
+      operationId: organizersIdPUT
+      parameters:
+      - name: id
+        in: path
+        description: Organizer ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizerUpdate'
+        required: true
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organizer'
+      x-swagger-router-controller: Organizers
+    delete:
+      tags:
+      - Organizers
+      summary: Delete an organizer by ID
+      operationId: organizersIdDELETE
+      parameters:
+      - name: id
+        in: path
+        description: Organizer ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful response
+      x-swagger-router-controller: Organizers
+components:
+  schemas:
+    User:
+      required:
+      - avatar
+      - email
+      - id
+      - name
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        avatar:
+          type: string
+        id:
+          type: integer
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        password: password
+        name: name
+        avatar: avatar
+        id: 0
+        email: email
+    UserRequest:
+      required:
+      - avatar
+      - email
+      - name
+      - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        avatar:
+          type: string
+    UserUpdate:
+      required:
+      - email
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        avatar:
+          type: string
+      nullable: true
+    Event:
+      required:
+      - cost
+      - description
+      - end_time
+      - id_category
+      - id_location
+      - id_main_organizer
+      - name
+      - picture
+      - start_time
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        cost:
+          type: number
+        id_location:
+          type: integer
+        id_category:
+          type: integer
+        id_main_organizer:
+          type: integer
+        picture:
+          type: string
+          format: url
+        id:
+          type: integer
+      example:
+        start_time: 2000-01-23T04:56:07.000+00:00
+        cost: 0.80082819046101150206595775671303272247314453125
+        id_category: 1
+        name: name
+        end_time: 2000-01-23T04:56:07.000+00:00
+        description: description
+        id_location: 6
+        id: 5
+        id_main_organizer: 5
+        picture: http://example.com/aeiou
+    EventRequest:
+      required:
+      - cost
+      - description
+      - end_time
+      - id_category
+      - id_location
+      - id_main_organizer
+      - name
+      - picture
+      - start_time
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        cost:
+          type: number
+        id_location:
+          type: integer
+        id_category:
+          type: integer
+        id_main_organizer:
+          type: integer
+        picture:
+          type: string
+          format: url
+    EventUpdate:
+      required:
+      - cost
+      - description
+      - end_time
+      - id_category
+      - id_location
+      - id_main_organizer
+      - name
+      - picture
+      - start_time
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        cost:
+          type: number
+        id_location:
+          type: integer
+        id_category:
+          type: integer
+        id_main_organizer:
+          type: integer
+        picture:
+          type: string
+          format: url
+    Category:
+      required:
+      - description
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+      example:
+        name: name
+        description: description
+        id: 0
+    CategoryRequest:
+      required:
+      - description
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    CategoryUpdate:
+      required:
+      - description
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      nullable: true
+    Location:
+      required:
+      - address
+      - department
+      - id
+      - municipality
+      - name
+      - picture
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        address:
+          type: string
+        municipality:
+          type: string
+        department:
+          type: string
+        picture:
+          type: string
+          format: url
+      example:
+        address: address
+        name: name
+        municipality: municipality
+        id: 0
+        department: department
+        picture: http://example.com/aeiou
+    LocationRequest:
+      required:
+      - address
+      - department
+      - municipality
+      - name
+      - picture
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        municipality:
+          type: string
+        department:
+          type: string
+        picture:
+          type: string
+          format: url
+    LocationUpdate:
+      required:
+      - address
+      - department
+      - municipality
+      - name
+      - picture
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        municipality:
+          type: string
+        department:
+          type: string
+        picture:
+          type: string
+          format: url
+      nullable: true
+    Organizer:
+      required:
+      - email
+      - id
+      - name
+      - organization
+      - phone
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        organization:
+          type: string
+      example:
+        phone: phone
+        organization: organization
+        name: name
+        id: 0
+        email: email
+    OrganizerRequest:
+      required:
+      - email
+      - name
+      - organization
+      - phone
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        organization:
+          type: string
+    OrganizerUpdate:
+      required:
+      - email
+      - name
+      - organization
+      - phone
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        organization:
+          type: string
+      nullable: true
